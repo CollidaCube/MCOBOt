@@ -9,6 +9,8 @@ import com.collidacube.bot.data.impl.event.Event;
 import com.collidacube.bot.data.impl.participant.Participant;
 import com.collidacube.bot.modules.ProfanityPrevention;
 import com.collidacube.bot.modules.Verification;
+import com.collidacube.bot.utils.log.Logger;
+import com.collidacube.bot.utils.log.LogMode;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
@@ -44,29 +46,42 @@ public class Bot {
 			.login().join();
 
 	public static void main(String[] args) {
+		Logger.log(LogMode.INFO, "Loading...");
 		// reloadSlashCommands();
 
+		Logger.log(LogMode.INFO, "Initializing commands...");
 		new VerifyCommand();
 		new UpdateInfoCommand();
 		new InfoCommand();
 		new ApplyCommand();
 		new EventCommand();
 
-		api.addServerMemberJoinListener(new Verification());
-		api.addMessageCreateListener(new ProfanityPrevention());
-		api.addAutocompleteCreateListener(new EventCommand());
+		Logger.DEBUG_MODE = true;
 
+		Logger.log(LogMode.INFO, "Initializing modules...");
+		Logger.log(LogMode.DEBUG, "*:: Verification");
+		api.addServerMemberJoinListener(new Verification());
+		Logger.log(LogMode.DEBUG, "*:: ProfanityPrevention");
+		api.addMessageCreateListener(new ProfanityPrevention());
+		Logger.log(LogMode.DEBUG, "*:: EventCommand");
+		api.addAutocompleteCreateListener(new EventCommand());
+		Logger.log(LogMode.DEBUG, "");
+		
+		Logger.DEBUG_MODE = false;
+
+		Logger.log(LogMode.INFO, "Loading data...");
 		Participant.DATA_MANAGER.toString();
 		Event.DATA_MANAGER.toString();
 
+		Logger.log(LogMode.INFO, "Registering shutdown hook...");
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			System.out.println("Saving");
+			Logger.log(LogMode.INFO, "Saving...");
 			api.disconnect();
 			Participant.DATA_MANAGER.save();
 			Event.DATA_MANAGER.save();
 		}));
 
-		System.out.println("Ready");
+		Logger.log(LogMode.SUCCESS, "Ready!");
 		waitForInput();
 		System.exit(1);
 	}

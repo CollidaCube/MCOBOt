@@ -1,5 +1,7 @@
 package com.collidacube.bot.utils;
 
+import com.collidacube.bot.utils.specialized.Utils;
+
 import java.util.List;
 
 public class Detect {

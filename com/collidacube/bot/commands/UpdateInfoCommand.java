@@ -6,8 +6,6 @@ import com.collidacube.bot.data.impl.participant.Participant;
 import com.collidacube.bot.data.impl.participant.Position;
 import com.collidacube.bot.exceptions.CouldntUpdateInfoException;
 import com.collidacube.bot.utils.Detect;
-import com.collidacube.bot.utils.LoggingChannel;
-
 import org.javacord.api.entity.Attachment;
 import org.javacord.api.entity.message.MessageFlag;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -203,7 +201,7 @@ public class UpdateInfoCommand extends Command {
 							.setColor(Color.GREEN)
 					).respond();
 			
-			LoggingChannel.REGISTRATION_LOGS.log(registrar, "Updated Information", desc);
+//			LoggingCategory.REGISTRATION_LOGS.log("Updated Information", desc, Color.GREEN);
 		} catch (CouldntUpdateInfoException e) {
 			interaction.createImmediateResponder()
 					.setFlags(MessageFlag.EPHEMERAL)

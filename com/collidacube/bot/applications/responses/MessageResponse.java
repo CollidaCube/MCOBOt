@@ -47,7 +47,6 @@ public class MessageResponse extends Response implements MessageCreateListener, 
 
     @Override
     public boolean equals(Object obj) {
-        System.out.println("Equals?");
         return super.equals(obj);
     }
     

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.collidacube.bot.utils.SqlUtils;
+import com.collidacube.bot.utils.specialized.SqlUtils;
 
 public class DataManager<T extends DataPackage<?>> {
 

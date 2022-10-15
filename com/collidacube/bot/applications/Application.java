@@ -31,7 +31,6 @@ public class Application {
 		this.questions = questions;
 		assessCompletion();
 		appFuture.whenComplete((app, throwable) -> {
-			System.out.println(appFuture.isCancelled());
 			finish();
 		});
 	}

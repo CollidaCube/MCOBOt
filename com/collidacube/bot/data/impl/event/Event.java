@@ -13,7 +13,7 @@ import org.javacord.api.interaction.SlashCommandOptionChoice;
 import com.collidacube.bot.Bot;
 import com.collidacube.bot.data.DataManager;
 import com.collidacube.bot.data.DataPackage;
-import com.collidacube.bot.utils.Utils;
+import com.collidacube.bot.utils.specialized.Utils;
 
 public class Event extends DataPackage<Event> {
 
@@ -62,8 +62,6 @@ public class Event extends DataPackage<Event> {
         setChannel(channelId);
         
         if (channel == null) createChannel();
-
-        System.out.println("label:" + label + ",code:" + code + ",channelId:" + channel);
     }
 
     public Event(String label) {
@@ -74,7 +72,6 @@ public class Event extends DataPackage<Event> {
         eventsByLabel.remove(this.label);
         this.label = label;
         eventsByLabel.put(label, this);
-        System.out.println(label);
     }
 
     public void regenerateCode() {
@@ -140,7 +137,6 @@ public class Event extends DataPackage<Event> {
 
     @Override
     public HashMap<String, String> getData() {
-        System.out.println(!eventsByCode.containsKey(code));
         if (!eventsByCode.containsKey(code)) return null;
         return Utils.parseToMap("label:" + label + ",code:" + code + ",channelId:" + channel.getIdAsString(), ",", ":");
     }

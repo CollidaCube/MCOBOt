@@ -4,7 +4,7 @@ import com.collidacube.bot.Bot;
 import com.collidacube.bot.data.impl.participant.Location;
 import com.collidacube.bot.data.impl.participant.Participant;
 import com.collidacube.bot.data.impl.participant.Position;
-import com.collidacube.bot.utils.LoggingChannel;
+import com.collidacube.bot.utils.log.LoggingCategory;
 
 import org.javacord.api.entity.message.MessageFlag;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -79,9 +79,7 @@ public class VerifyCommand extends Command {
 		Position position = Position.valueOf(positionId);
 
 		boolean successful = register(registrar, registrant, location, position);
-		System.out.println(successful);
 		if (successful) {
-			System.out.println("Succeeded");
 			interaction.createImmediateResponder()
 					.setFlags(MessageFlag.EPHEMERAL)
 					.addEmbed(new EmbedBuilder()
@@ -91,7 +89,6 @@ public class VerifyCommand extends Command {
 							.setColor(Color.GREEN)
 					).respond();
 		} else {
-			System.out.println("Failed");
 			interaction.createImmediateResponder()
 					.setFlags(MessageFlag.EPHEMERAL)
 					.addEmbed(new EmbedBuilder()
@@ -126,14 +123,13 @@ public class VerifyCommand extends Command {
 		return true;
 	}
 
-	public static final LoggingChannel logger = LoggingChannel.REGISTRATION_LOGS;
+	public static final LoggingCategory logger = LoggingCategory.REGISTRATION_LOGS;
 	public void logRegistration(User registrar, User registrant, Location location, Position position) {
-		logger.log(registrar,
-				"Verified User",
-				 "Successfully Verified " + registrant.getMentionTag() + "\n"
-						+ "• LOCATION: `" + location.label + "`\n"
-					    + "• POSITION: `" + position.label + "`",
-				Color.GREEN);
+//		logger.log("Verified User",
+//				 "Successfully Verified " + registrant.getMentionTag() + "\n"
+//						+ "• LOCATION: `" + location.label + "`\n"
+//					    + "• POSITION: `" + position.label + "`",
+//				Color.GREEN);
 	}
 
 }

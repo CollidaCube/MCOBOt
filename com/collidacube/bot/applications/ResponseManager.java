@@ -1,7 +1,7 @@
 package com.collidacube.bot.applications;
 
 import com.collidacube.bot.applications.responses.Response;
-import com.collidacube.bot.utils.Utils;
+import com.collidacube.bot.utils.specialized.Utils;
 
 import org.javacord.api.entity.message.Message;
 

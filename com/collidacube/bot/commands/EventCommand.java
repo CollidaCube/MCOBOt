@@ -42,8 +42,15 @@ public class EventCommand extends Command implements AutocompleteCreateListener 
                     "close",
                     "Close an mco event. Admins only",
                     Arrays.asList(
-							SlashCommandOption.create(SlashCommandOptionType.STRING,
-                                    "name", "The name of the event")
+				// 			SlashCommandOption.create(SlashCommandOptionType.STRING,
+                                //     "name", "The name of the event")
+                                new SlashCommandOptionBuilder()
+                                        .setType(SlashCommandOptionType.STRING)
+                                        .setName("name")
+                                        .setDescription("The name of the event")
+                                        .setRequired(true)
+                                        .setAutocompletable(true)
+                                        .build()
                     )
             )
         );
@@ -168,18 +175,18 @@ public class EventCommand extends Command implements AutocompleteCreateListener 
 
     @Override
     public void onAutocompleteCreate(AutocompleteCreateEvent event) {
+        event.getAutocompleteInteraction()
+            .respondWithChoices(Arrays.asList(
+                SlashCommandOptionChoice.create("one", 1),
+                SlashCommandOptionChoice.create("two", 2)));
+
+
         AutocompleteInteraction interaction = event.getAutocompleteInteraction();
-        List<String> args = interaction.getArguments()
-                .stream()
-                .map(t -> t.getStringValue().orElse(null))
-                .collect(Collectors.toList());
-        System.out.println(String.join(", ", args));
-        System.out.println(interaction.getFocusedOption());
 
         interaction.respondWithChoices(
                 Arrays.asList(
-                        SlashCommandOptionChoice.create("one", 1),
-                        SlashCommandOptionChoice.create("two", 2)
+                        SlashCommandOptionChoice.create("one", "one"),
+                        SlashCommandOptionChoice.create("two", "two")
                 )
         );
     }
