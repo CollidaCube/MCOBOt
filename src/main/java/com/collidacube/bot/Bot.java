@@ -46,7 +46,7 @@ public class Bot {
 
 	public static final DiscordApi api = new DiscordApiBuilder()
 												.setAllIntents()
-												.setToken(config.getProperty("discordToken"))
+												.setToken(config.getProperty("discordToken2"))
 												.login().join();
 
 	public static final DiscordBot bot = new DiscordBotBuilder()
@@ -72,6 +72,8 @@ public class Bot {
 		logger.log(LogMode.INFO, "Saving...");
 		api.disconnect();
 		DataManager.saveAll();
+		scheduler.interrupt();
+		System.exit(0);
 	}
 
 	public static void reloadSlashCommands() {

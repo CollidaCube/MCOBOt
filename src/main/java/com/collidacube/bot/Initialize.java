@@ -56,7 +56,7 @@ public class Initialize {
     }
 
     public static void modules() {
-        Bot.logger.log(LogMode.INFO, "Initializing modules...");
+        Bot.logger.log(LogMode.INFO, "*:: Initializing modules...");
 		Bot.api.addServerMemberJoinListener(new Verification());
 		Bot.api.addMessageCreateListener(new ProfanityPrevention());
 		Bot.api.addButtonClickListener(new ReportHandler());
